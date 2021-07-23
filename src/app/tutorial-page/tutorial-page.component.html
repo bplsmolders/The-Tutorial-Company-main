@@ -1,0 +1,38 @@
+<div class="tutorial-page">
+    <div class="top-container">
+        <div class="sub-container">
+            <div class="panel">
+                <h1>Trainer 1</h1>
+                <h1>Trainer 2</h1>
+            </div>   
+            
+        </div>
+
+        <div class="sub-container">
+            <div class="panel">
+                <adf-content-metadata
+                    [node]="node"
+                    [displayEmpty]="false"
+                    *ngIf="node else PleaseSelect"
+                ></adf-content-metadata>
+
+
+                <ng-template #PleaseSelect>
+                    <!-- <ng-container > {{"APP.TUTORIAL_PAGE.FOLDER_REQUEST" | translate }} </ng-container> -->
+                </ng-template>  
+             </div>
+        </div>
+    </div>
+
+    <div class="bottom-container">
+        <div class="panel">
+            <adf-document-list
+                [currentFolderId]="nodeId"
+                [contextMenuActions]="true"
+                [contentActions]="true"
+                (nodeSelected)="getInput($event)"
+                >
+            </adf-document-list>
+        </div>
+    </div>
+</div>

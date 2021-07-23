@@ -1,0 +1,7 @@
+adf-sidenav-layout {
+    height: 100%;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+    justify-content: space-between;
+}
