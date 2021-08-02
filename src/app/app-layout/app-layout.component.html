@@ -1,10 +1,10 @@
-<adf-sidenav-layout [sidenavMin]="70" [sidenavMax]="200" [stepOver]="780" [hideSidenav]="false" [expandedSidenav]="false">
+<adf-sidenav-layout [sidenavMin]="70" [sidenavMax]="200" [stepOver]="780" [hideSidenav]="false" [expandedSidenav]="true">
 
     <adf-sidenav-layout-header>
         <ng-template let-toggleMenu="toggleMenu">
             <mat-toolbar color="primary" class="adf-app-layout-toolbar mat-elevation-z6">
                 <div>
-                    <button mat-icon-button>
+                    <button (click)="toggleMenu()" mat-icon-button>
                         <mat-icon>menu</mat-icon>
                     </button>
                     <span fxFlex="1 1 auto" fxShow fxHide.lt-sm="true">The Training Company</span>
@@ -34,14 +34,14 @@
                     <mat-icon matListIcon class="sidenav-menu-icon">school</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Training Info</div>
                 </a>
-                <a mat-list-item class="adf-sidenav-link" routerLink="/my-profile">
+                <!-- <a mat-list-item class="adf-sidenav-link" routerLink="/my-profile">
                     <mat-icon matListIcon class="sidenav-menu-icon">face</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Profile</div>
                 </a>
                 <a mat-list-item class="adf-sidenav-link" routerLink="/user-management">
                     <mat-icon matListIcon class="sidenav-menu-icon">group_add</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">User Management</div>
-                </a>
+                </a> -->
                 <a mat-list-item adf-logout class="adf-sidenav-link">
                     <mat-icon matListIcon class="sidenav-menu-icon">exit_to_app</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Logout</div>

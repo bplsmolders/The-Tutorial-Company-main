@@ -2,6 +2,7 @@ import { Component, ViewChild, Input } from '@angular/core';
 import { NotificationService } from '@alfresco/adf-core';
 import { DocumentListComponent } from '@alfresco/adf-content-services';
 import { PreviewService } from '../services/preview.service';
+import { NodePermissionDialogService } from '@alfresco/adf-content-services';
 
 @Component({
   selector: 'app-documentlist',
@@ -18,7 +19,10 @@ export class DocumentlistComponent {
   @ViewChild('documentList', { static: true })
   documentList: DocumentListComponent;
 
-  constructor(private notificationService: NotificationService, private preview: PreviewService) {
+  constructor(
+    private notificationService: NotificationService, 
+    private preview: PreviewService,
+    private nodePermissionService: NodePermissionDialogService) {
   }
 
   uploadSuccess(event: any) {

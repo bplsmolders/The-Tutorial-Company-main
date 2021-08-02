@@ -26,6 +26,22 @@
     background-color: white;
 }
 
+.sub-panel {
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F1F1F1;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    padding-right: 10px;
+}
+
 .bottom-container {
     // padding: 25px;
     width: 100%;
