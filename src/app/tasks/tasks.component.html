@@ -6,7 +6,14 @@
 
 <adf-tasklist
   [appId]="appId"
-  state="open"
+  state="active"
   assignment="assignee"
-  (rowClick)="onRowClick($event)">
+  (rowClick)="onRowClick($event)"
+  >
+
+    <data-columns>
+        <data-column key="name" title="NAME" class="full-width name-column"></data-column>
+        <data-column key="created" title="Created" class="hidden"></data-column>
+    </data-columns>
+
 </adf-tasklist>

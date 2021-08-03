@@ -29,12 +29,27 @@
 
     <div class="bottom-container">
         <div class="panel">
-            <adf-document-list
+            <adf-breadcrumb
+                [target]="documentList"
+                [rootId]="nodeId">
+            </adf-breadcrumb>
+
+            <adf-document-list #documentList
                 [currentFolderId]="nodeId"
                 [contextMenuActions]="true"
                 [contentActions]="true"
                 (nodeSelected)="getInput($event)"
-                >
+            >    
+                    <content-actions>
+                        <!-- custom handler for sign-up process -->
+                        <content-action
+                            target="folder"
+                            title="Aanmelden"
+                            [visible]="showSignUp"
+                            (execute)="startSignUpProces($event)"
+                            >
+                        </content-action>
+                    </content-actions>
             </adf-document-list>
         </div>
     </div>

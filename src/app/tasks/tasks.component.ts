@@ -23,6 +23,7 @@ export class TasksComponent implements OnInit {
   }
 
   onRowClick(taskId: string) {
+    console.log(taskId)
     if (taskId) {
       this.router.navigate(['/apps', this.appId || 0, 'tasks', taskId]);
     }

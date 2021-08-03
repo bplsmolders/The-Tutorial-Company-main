@@ -1,7 +1,8 @@
-import { NodeEntry, Node } from '@alfresco/js-api';
+import { NodeEntry, Node, EndpointBasicAuthRepresentation } from '@alfresco/js-api';
 import { Component } from '@angular/core';
 import { AlfrescoApiService } from '@alfresco/adf-core';
 import { EcmUserService } from '@alfresco/adf-core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-tutorial-page',
@@ -9,16 +10,36 @@ import { EcmUserService } from '@alfresco/adf-core';
   styleUrls: ['./tutorial-page.component.scss']
 })
 export class TutorialPageComponent  {
-  nodeId = 'ea768be7-f245-451d-a95c-c57ce52a2c15'
+  nodeId = '20a433ac-cc73-4445-b856-6011d8797121'
+  processDefinitionId = 'Aanmeldprocestrainee2:2:19616'
   node:Node;
   nodeDescription:string;
+  username="bart.smolders@incentro.com"
+  passw="1ncentrO"
   nodeTitle:string;
   relatedGroups:Array<any>;
   trainers:Array<object>;
   constructor(
     private apiService:AlfrescoApiService,
-    private userService: EcmUserService
+    private userService: EcmUserService,
+    private HttpClient: HttpClient,
   ) { }
+
+  //This function shows the SignUp action on a folder.
+  showSignUp = (node: Node): boolean => {
+    if(node["entry"].aspectNames[0].includes("training-specificaties:Beschikbaarheid")){
+      return true
+    }
+    return false;
+  }
+
+  startSignUpProces(event:Event) {
+    
+    // this.HttpClient.get("https://demo.incentro.digital/activiti-app/api/enterprise/process-definitions/Aanmeldprocestrainee2:2:19616/start-form", {headers: {'Authorization' : 'Basic YmFydC5zbW9sZGVyc0BpbmNlbnRyby5jb206MW5jZW50ck8='}})
+    //       .subscribe((res : {}) => console.log(res.))
+  }
+
+
 
   //This function retrieves the selected node on the page.
   getInput(node:NodeEntry[]) {
@@ -37,7 +58,6 @@ export class TutorialPageComponent  {
     
     // first filter out the correct group that holds the trainers. this is done by checking if the group includes the name of the folder.
     this.trainers=[];
-    console.log(this.relatedGroups)
     this.relatedGroups.forEach(group => {
       if(group.authorityId.toUpperCase().includes(this.node.name.toUpperCase()) || this.relatedGroups.length === 1){
         //if it does, search the members of the group, then get the userinfo and push it on the array.
