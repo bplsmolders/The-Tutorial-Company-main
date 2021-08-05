@@ -25,6 +25,7 @@ import { StartProcessComponent } from './start-process/start-process.component';
 import { appRoutes } from './app.routes';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { TutorialPageComponent } from './tutorial-page/tutorial-page.component';
+import { ApplyOverlayComponent } from './applyOverlay/applyOverlay.component';
 
 
 // Localization
@@ -99,7 +100,8 @@ registerLocaleData(localeSv);
         BlobViewComponent,
         BetterButtonComponent,
         MyProfileComponent,
-        UserManagementComponent
+        UserManagementComponent,
+        ApplyOverlayComponent
     ],
     providers: [
         PreviewService,

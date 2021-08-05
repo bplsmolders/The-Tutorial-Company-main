@@ -1,6 +1,10 @@
 <div class="tutorial-page">
+    <div class=overlay  *ngIf="showOverlay">
+        <app-apply-overlay class=form-container [closeOverlay]="closeOverlay" [titel]="nodeName"></app-apply-overlay>
+    </div>
     <div class="top-container">
         <div class="sub-container">
+            
             <div class="panel">
                 <div *ngIf="trainers">
                     <h2>Beschikbare Trainers</h2>
@@ -54,3 +58,4 @@
         </div>
     </div>
 </div>
+

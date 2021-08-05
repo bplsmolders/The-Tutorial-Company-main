@@ -1,0 +1,27 @@
+<div>
+    <form>
+        <h1 *ngIf="form.course">{{form.course}}</h1><br>
+        
+        <label for="fullName">Volledige Naam:</label>
+        <input [(ngModel)]="form.fullName" type="text" name="fullName">
+        
+        <label for="company">Bedrijf:</label>
+        <input [(ngModel)]="form.company" type="text" name="company">
+
+        <label for="afdeling">Afdeling:</label>
+        <input [(ngModel)]="form.department" type="text" name="afdeling">
+    
+        <label for="position">Functie:</label>
+        <input [(ngModel)]="form.position" type="text" name="position">
+
+        <label for="phone">Telefoonnummer:</label>
+        <input [(ngModel)]="form.phoneNumber" type="text" name="Telefoonnummer">
+
+        <label for="email">Email:</label>
+        <input [(ngModel)]="form.email" type="text" name="email">
+    </form>
+    
+    <button (click)="closeOverlay()" >Annuleren!</button>
+    <button (click)="sendForm()">Let's Go!</button>
+
+</div>

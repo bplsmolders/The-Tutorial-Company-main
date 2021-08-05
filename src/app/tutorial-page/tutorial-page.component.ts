@@ -10,19 +10,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./tutorial-page.component.scss']
 })
 export class TutorialPageComponent  {
-  nodeId = '20a433ac-cc73-4445-b856-6011d8797121'
-  processDefinitionId = 'Aanmeldprocestrainee2:2:19616'
+  showOverlay = false;
+  nodeId = '20a433ac-cc73-4445-b856-6011d8797121';
+  processDefinitionId = 'Aanmeldprocestrainee2:2:19616';
+  nodeName:string;
   node:Node;
   nodeDescription:string;
-  username="bart.smolders@incentro.com"
-  passw="1ncentrO"
   nodeTitle:string;
   relatedGroups:Array<any>;
   trainers:Array<object>;
   constructor(
     private apiService:AlfrescoApiService,
     private userService: EcmUserService,
-    private HttpClient: HttpClient,
   ) { }
 
   //This function shows the SignUp action on a folder.
@@ -33,10 +32,14 @@ export class TutorialPageComponent  {
     return false;
   }
 
+  //This function closes the overlay when pressed the SignUp action on a folder.
+  closeOverlay = (): void => {
+    console.log("close")
+    this.showOverlay = false
+  }
+  
   startSignUpProces(event:Event) {
-    
-    // this.HttpClient.get("https://demo.incentro.digital/activiti-app/api/enterprise/process-definitions/Aanmeldprocestrainee2:2:19616/start-form", {headers: {'Authorization' : 'Basic YmFydC5zbW9sZGVyc0BpbmNlbnRyby5jb206MW5jZW50ck8='}})
-    //       .subscribe((res : {}) => console.log(res.))
+    this.showOverlay = true 
   }
 
 
@@ -44,6 +47,7 @@ export class TutorialPageComponent  {
   //This function retrieves the selected node on the page.
   getInput(node:NodeEntry[]) {
     this.node=node[0].entry
+    this.nodeName = this.node.name
     this.nodeTitle = this.node.properties["cm:title"];
     this.nodeDescription = this.node.properties["cm:description"];
     
