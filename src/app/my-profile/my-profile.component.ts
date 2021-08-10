@@ -17,19 +17,10 @@ export class MyProfileComponent  {
   constructor(private userService: BpmUserService, private httpClient: HttpClient){}
 
   ngOnInit() {
-    
     this.userService.getCurrentUserInfo()
       .subscribe((response: BpmUserModel) => {
         console.log(response)
       })
-    
-    // this.httpClient.get()
-
-    // // Fetch werkt niet vanwege CORS error...
-    // fetch('https://demo.incentro.digital/alfresco/api/-default-/public/alfresco/versions/1/people/-my-')
-    //   .then(response => response.json())
-    //   .then(data => console.log(data))
   }
 
-  
 }

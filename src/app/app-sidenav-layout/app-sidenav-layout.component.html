@@ -18,27 +18,23 @@
     <adf-sidenav-layout-navigation>
         <ng-template let-isMenuMinimized="isMenuMinimized">
             <mat-nav-list class="adf-sidenav-linklist">
-                <!-- <a mat-list-item class="adf-sidenav-link" routerLink="/login">
-                    <mat-icon matListIcon class="sidenav-menu-icon">vpn_key</mat-icon>
-                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Login</div>
-                </a> -->
                 <a mat-list-item class="adf-sidenav-link" routerLink="/apps">
                     <mat-icon matListIcon class="sidenav-menu-icon">pending_actions</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Processen en Taken</div>
                 </a>
                 <a mat-list-item class="adf-sidenav-link" routerLink="/documentlist">
                     <mat-icon matListIcon class="sidenav-menu-icon">folder_open</mat-icon>
-                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Documents</div>
+                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Documenten</div>
                 </a>
-                <a mat-list-item class="adf-sidenav-link" routerLink="/tutorial-page">
+                <a mat-list-item class="adf-sidenav-link" routerLink="/application-page">
                     <mat-icon matListIcon class="sidenav-menu-icon">school</mat-icon>
-                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Training Info</div>
+                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Trainingen en Opleidingen</div>
                 </a>
-                <!-- <a mat-list-item class="adf-sidenav-link" routerLink="/my-profile">
+                <a mat-list-item class="adf-sidenav-link" routerLink="/my-profile">
                     <mat-icon matListIcon class="sidenav-menu-icon">face</mat-icon>
-                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Profile</div>
+                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Profiel</div>
                 </a>
-                <a mat-list-item class="adf-sidenav-link" routerLink="/user-management">
+                <!-- <a mat-list-item class="adf-sidenav-link" routerLink="/user-management">
                     <mat-icon matListIcon class="sidenav-menu-icon">group_add</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">User Management</div>
                 </a> -->

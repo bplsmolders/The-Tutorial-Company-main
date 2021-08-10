@@ -1,6 +1,49 @@
-<h3>Task details</h3>
+<div class="task-details">
 
-<adf-task-details
-  [taskId]="taskId"
-  (formContentClicked)="onContentClick($event)">
-</adf-task-details>
+  <div class="left-panel">
+
+    <adf-task-details
+      [taskId]="taskId"
+      showComments="false"
+      showInvolvePeople="false"
+      showHeader="false"
+      (formContentClicked)="onContentClick($event)">
+    </adf-task-details>
+  </div>
+
+  <div class="right-panel">
+    <h1>Relevante Documenten</h1>
+    <adf-document-list #documentList
+      [contextMenuActions]="true"
+      [contentActions]="true"
+      [currentFolderId]="nodeId"
+    >
+    <data-columns>
+      <data-column key="$thumbnail" type="image"></data-column>
+          <data-column title="Name" key="name" class="full-width ellipsis-cell"></data-column>
+      </data-columns>
+
+      <content-actions>
+        <!-- custom handler for sign-up process -->
+        <content-action
+            target="document"
+            title="download"
+            permission="delete"
+            disabl
+            handler="download"
+            disableWithNoPermission="true"
+          >
+        </content-action>
+        <content-action
+          target="document"
+          title="edit"
+          permission="delete"
+          handler="edit"
+          disableWithNoPermission="true"
+        >
+        </content-action>
+      </content-actions>
+    </adf-document-list>
+  </div>
+</div>
+

@@ -1,7 +1,27 @@
 <div class="my-profile">
-    <adf-card-view
-        [properties]="[{label: 'My Label', value: 'My value'}]"
-        [editable]="true">
-    </adf-card-view>
+    <form>
+        <H1>Profiel Info</H1>
+        
+        <label for="fullName">Volledige Naam:</label>
+        <input type="text" name="fullName">
+        
+        <label for="company">Organisatie:</label>
+        <input type="text" name="company">
+
+        <label for="afdeling">Afdeling:</label>
+        <input type="text" name="afdeling">
+    
+        <label for="position">Functie:</label>
+        <input type="text" name="position">
+
+        <label for="phone">Telefoonnummer:</label>
+        <input type="text" name="Telefoonnummer">
+
+        <label for="email">Email:</label>
+        <input type="text" name="email">
+    </form>
+    
+    <button (click)="closeOverlay()" >Annuleren</button>
+    <button (click)="sendForm()">Update</button>
 
 </div>

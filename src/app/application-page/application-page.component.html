@@ -1,6 +1,8 @@
 <div class="tutorial-page">
-    <div class=overlay  *ngIf="showOverlay">
-        <app-apply-overlay class=form-container [closeOverlay]="closeOverlay" [titel]="nodeName"></app-apply-overlay>
+    <div class=bottom-overlay *ngIf=showOverlay>
+        <div class=overlay  *ngIf="showOverlay">
+            <app-application-form class=form-container [closeOverlay]="closeOverlay" [courseInfo]="courseInfo"></app-application-form>
+        </div>
     </div>
     <div class="top-container">
         <div class="sub-container">

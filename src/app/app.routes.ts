@@ -24,10 +24,10 @@ import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { DocumentlistComponent } from './documentlist/documentlist.component';
 import { StartProcessComponent } from './start-process/start-process.component';
-import { AppLayoutComponent } from './app-layout/app-layout.component';
+import { AppSidenavLayoutComponent } from './app-sidenav-layout/app-sidenav-layout.component';
 import { FileViewComponent } from './file-view/file-view.component';
 import { BlobViewComponent } from './file-view/blob-view.component';
-import { TutorialPageComponent } from './tutorial-page/tutorial-page.component';
+import { ApplicationPageComponent } from './application-page/application-page.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 
@@ -36,7 +36,7 @@ export const appRoutes: Routes = [
   { path: 'preview/blob', component: BlobViewComponent, outlet: 'overlay', pathMatch: 'full' },
   {
     path: '',
-    component: AppLayoutComponent,
+    component: AppSidenavLayoutComponent,
     children: [
               {
                   path: '',
@@ -47,8 +47,8 @@ export const appRoutes: Routes = [
                 component: HomeComponent
             },
             {
-              path:'tutorial-page',
-              component: TutorialPageComponent,
+              path:'application-page',
+              component: ApplicationPageComponent,
               canActivate: [ AuthGuardEcm ]
             },
               {
@@ -86,7 +86,6 @@ export const appRoutes: Routes = [
                 component: UserManagementComponent,
                 canActivate: [ AuthGuardEcm ]
               }
-
           ]
   },
   {

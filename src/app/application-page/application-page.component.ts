@@ -5,11 +5,11 @@ import { EcmUserService } from '@alfresco/adf-core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
-  selector: 'app-tutorial-page',
-  templateUrl: './tutorial-page.component.html',
-  styleUrls: ['./tutorial-page.component.scss']
+  selector: 'app-application-page',
+  templateUrl: './application-page.component.html',
+  styleUrls: ['./application-page.component.scss']
 })
-export class TutorialPageComponent  {
+export class ApplicationPageComponent  {
   showOverlay = false;
   nodeId = '20a433ac-cc73-4445-b856-6011d8797121';
   processDefinitionId = 'Aanmeldprocestrainee2:2:19616';
@@ -19,6 +19,8 @@ export class TutorialPageComponent  {
   nodeTitle:string;
   relatedGroups:Array<any>;
   trainers:Array<object>;
+  courseInfo:{topic:string, course:string, training:string, nodeId:string} = { topic: '', course: '', training: '', nodeId:''};
+
   constructor(
     private apiService:AlfrescoApiService,
     private userService: EcmUserService,
@@ -46,10 +48,21 @@ export class TutorialPageComponent  {
 
   //This function retrieves the selected node on the page.
   getInput(node:NodeEntry[]) {
+    // selecting the right node for further use
     this.node=node[0].entry
-    this.nodeName = this.node.name
+
+    // selecting title and description to display on page
     this.nodeTitle = this.node.properties["cm:title"];
     this.nodeDescription = this.node.properties["cm:description"];
+
+
+    // constructing a courseInfo object to pass down trough the next comoponent
+    this.courseInfo.training = this.node.name
+    let pathArray = this.node.path.name.split('/')
+    this.courseInfo.course= pathArray[pathArray.length-1]
+    this.courseInfo.topic= pathArray[pathArray.length-2]
+    this.courseInfo.nodeId = this.node.id
+    console.log(this.courseInfo)
     
 
     // Filter out the related Groups found in the metadata of the selected node

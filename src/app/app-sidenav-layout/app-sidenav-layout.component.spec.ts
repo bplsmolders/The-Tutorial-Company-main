@@ -4,13 +4,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContentModule } from '@alfresco/adf-content-services';
 import { ProcessModule } from '@alfresco/adf-process-services';
 import { CoreModule, TranslateLoaderService, AppConfigService, AppConfigServiceMock } from '@alfresco/adf-core';
-import { AppLayoutComponent } from './app-layout.component';
+import { AppSidenavLayoutComponent } from './app-sidenav-layout.component';
 import { AlfrescoApiServiceMock, AlfrescoApiService } from '@alfresco/adf-core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
-describe('AppLayoutComponent', () => {
-  let component: AppLayoutComponent;
-  let fixture: ComponentFixture<AppLayoutComponent>;
+describe('AppSidenavLayoutComponent', () => {
+  let component: AppSidenavLayoutComponent;
+  let fixture: ComponentFixture<AppSidenavLayoutComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -24,13 +24,13 @@ describe('AppLayoutComponent', () => {
           loader: { provide: TranslateLoader, useClass: TranslateLoaderService }
         })
       ],
-      declarations: [AppLayoutComponent],
+      declarations: [AppSidenavLayoutComponent],
       providers: [
         { provide: AlfrescoApiService, useClass: AlfrescoApiServiceMock },
         { provide: AppConfigService, useClass: AppConfigServiceMock }
       ]
     });
-    fixture = TestBed.createComponent(AppLayoutComponent);
+    fixture = TestBed.createComponent(AppSidenavLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

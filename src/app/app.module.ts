@@ -23,9 +23,9 @@ import { TaskDetailsComponent } from './task-details/task-details.component';
 import { DocumentlistComponent } from './documentlist/documentlist.component';
 import { StartProcessComponent } from './start-process/start-process.component';
 import { appRoutes } from './app.routes';
-import { AppLayoutComponent } from './app-layout/app-layout.component';
-import { TutorialPageComponent } from './tutorial-page/tutorial-page.component';
-import { ApplyOverlayComponent } from './applyOverlay/applyOverlay.component';
+import { AppSidenavLayoutComponent } from './app-sidenav-layout/app-sidenav-layout.component';
+import { ApplicationPageComponent } from './application-page/application-page.component';
+import { ApplicationFormComponent } from './application-form/application-form.component';
 
 
 // Localization
@@ -46,7 +46,6 @@ import localePl from '@angular/common/locales/pl';
 import localeFi from '@angular/common/locales/fi';
 import localeDa from '@angular/common/locales/da';
 import localeSv from '@angular/common/locales/sv';
-import { BetterButtonComponent } from './better-button/better-button.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 
@@ -86,7 +85,7 @@ registerLocaleData(localeSv);
         StencilsModule
     ],
     declarations: [
-        TutorialPageComponent,
+        ApplicationPageComponent,
         AppComponent,
         AppsComponent,
         HomeComponent,
@@ -95,13 +94,12 @@ registerLocaleData(localeSv);
         TaskDetailsComponent,
         DocumentlistComponent,
         StartProcessComponent,
-        AppLayoutComponent,
+        AppSidenavLayoutComponent,
         FileViewComponent,
         BlobViewComponent,
-        BetterButtonComponent,
         MyProfileComponent,
         UserManagementComponent,
-        ApplyOverlayComponent
+        ApplicationFormComponent
     ],
     providers: [
         PreviewService,

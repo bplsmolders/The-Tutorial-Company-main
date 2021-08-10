@@ -3,20 +3,19 @@ import { BpmUserService, BpmUserModel } from '@alfresco/adf-core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app-layout.component.html',
-  styleUrls: ['./app-layout.component.css']
+  templateUrl: './app-sidenav-layout.component.html',
+  styleUrls: ['./app-sidenav-layout.component.css']
 })
-export class AppLayoutComponent {
+export class AppSidenavLayoutComponent {
   currentUser: Node;
 
   // constructor for service injection
   constructor(private userService: BpmUserService){}
 
   ngOnInit() {
-    
     this.userService.getCurrentUserInfo()
       .subscribe((response: BpmUserModel) => {
-        console.log(response)
+        response
       })
   }
 
