@@ -8,6 +8,8 @@ import { AuthenticationService } from "@alfresco/adf-core";
 import { TrainingCompanyService } from 'app/training-company.service';
 import { getTasksResponse } from 'app/training-company.service';
 import { getProcessInstanceResponse } from 'app/training-company.service';
+import {map} from 'rxjs/operators'
+import { Observable, concat } from 'rxjs';
 
 @Component({
   selector: 'app-task-details',
@@ -19,7 +21,8 @@ export class TaskDetailsComponent implements OnInit {
   appId: string = null;
   taskId: string = null;
   fileShowed: any = null;
-  nodeId:string
+  nodeId:string;
+  processInstanceId:string;
   content: any = null;
   contentName: any = null;
 
@@ -40,29 +43,48 @@ export class TaskDetailsComponent implements OnInit {
       }
       if (params.taskId) {
         this.taskId = params.taskId;
-        let headers= new HttpHeaders()
-          .append("Authorization", this.auth.getTicketBpm())
-          .append("Content-Type","application/json")
 
-
-        this.http.get <getTasksResponse> (`https://demo.incentro.digital/activiti-app/api/enterprise/tasks/${this.taskId}`, { headers: headers })
-            .subscribe(res =>{
-                let processInstanceId:string = res.processInstanceId
-
-                this.http.get <getProcessInstanceResponse> (`https://demo.incentro.digital/activiti-app/api/enterprise/process-instances/${processInstanceId}`, {headers:headers})
-                .subscribe(res => {
-                    res.variables.forEach(variable => {
-                        if(variable.name === "relevantNodeId"){
-                            this.nodeId = variable.value
-                        }
-                    })
-                })
-            })
-
+        const nodeId$ = concat(this.getTask(this.taskId), this.getProcessInstance(this.processInstanceId))
+        nodeId$.subscribe(console.log)
       }
   })};
 
-  onContentClick(content: any): void {
+  /**
+   * 
+   * @param taskId 
+   * @returns observable that gets the processId so it can be used in the function "getProcessInstance"
+   */
+  getTask(taskId:string): Observable<any> {
+      let headers= new HttpHeaders()
+      .append("Authorization", this.auth.getTicketBpm())
+      .append("Content-Type","application/json")
+
+    return this.http.get <any> (`https://demo.incentro.digital/activiti-app/api/enterprise/tasks/${taskId}`, { headers: headers }) 
+      .pipe( 
+        map(res => this.processInstanceId = res.processInstanceId )
+      )
+  }
+
+  /**
+   * 
+   * @param processInstanceId 
+   * @returns observable that gets the current NodeId wich is ten used to call te relevant document with the adf-document-list.
+   */
+
+  getProcessInstance ( processInstanceId:string ): Observable<any> {
+    let headers= new HttpHeaders()
+    .append("Authorization", this.auth.getTicketBpm())
+    .append("Content-Type","application/json")
+
+    return this.http.get <getProcessInstanceResponse> (`https://demo.incentro.digital/activiti-app/api/enterprise/process-instances/${processInstanceId}`, {headers:headers})
+      .pipe(
+        map(res => res.variables.forEach((variable) => {
+          console.log(variable)
+        }))
+      )
+  }
+
+  onContentClick(content: any) {
     if (content.contentBlob) {
       this.preview.showBlob(content.name, content.contentBlob);
     } else {
@@ -71,3 +93,23 @@ export class TaskDetailsComponent implements OnInit {
   }
 
 }
+
+  /**
+   * Underneath you see how I used the old technique where I make a working code, making and subsribing on call in the other.
+   */
+    // let headers= new HttpHeaders()
+    //   .append("Authorization", this.auth.getTicketBpm())
+    //   .append("Content-Type","application/json")
+    // this.http.get <getTasksResponse> (`https://demo.incentro.digital/activiti-app/api/enterprise/tasks/${this.taskId}`, { headers: headers })
+    //     .subscribe(res =>{
+    //         let processInstanceId:string = res.processInstanceId
+
+    //         this.http.get <getProcessInstanceResponse> (`https://demo.incentro.digital/activiti-app/api/enterprise/process-instances/${processInstanceId}`, {headers:headers})
+    //         .subscribe(res => {
+    //             res.variables.forEach(variable => {
+    //                 if(variable.name === "relevantNodeId"){
+    //                     this.nodeId = variable.value
+    //                 }
+    //             })
+    //         })
+    //     })
