@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Input } from "@angular/core";
-import { ApplicationForm, CourseInfo } from "app/training-company.service";
-import { TrainingCompanyService } from "app/training-company.service";
+import { ApplicationForm, CourseInfo } from "../../services/ts-interfaces.service";
+import { TrainingCompanyService } from "../../services/training-company.service";
 
 @Component({
     selector: 'app-application-form',

@@ -17,19 +17,19 @@
 
 import { Routes } from '@angular/router';
 import { AuthGuardBpm, AuthGuardEcm } from '@alfresco/adf-core';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { AppsComponent } from './apps/apps.component';
-import { TasksComponent } from './tasks/tasks.component';
-import { TaskDetailsComponent } from './task-details/task-details.component';
-import { DocumentlistComponent } from './documentlist/documentlist.component';
-import { StartProcessComponent } from './start-process/start-process.component';
-import { AppSidenavLayoutComponent } from './app-sidenav-layout/app-sidenav-layout.component';
-import { FileViewComponent } from './file-view/file-view.component';
-import { BlobViewComponent } from './file-view/blob-view.component';
-import { ApplicationPageComponent } from './application-page/application-page.component';
-import { MyProfileComponent } from './my-profile/my-profile.component';
-import { UserManagementComponent } from './user-management/user-management.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { AppsComponent } from './components/apps/apps.component';
+import { TasksComponent } from './components/tasks/tasks.component';
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
+import { DocumentlistComponent } from './components/documentlist/documentlist.component';
+import { StartProcessComponent } from './components/start-process/start-process.component';
+import { AppSidenavLayoutComponent } from './components/app-sidenav-layout/app-sidenav-layout.component';
+import { FileViewComponent } from './components/file-view/file-view.component';
+import { BlobViewComponent } from './components/file-view/blob-view.component';
+import { ApplicationPageComponent } from './components/application-page/application-page.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
 
 export const appRoutes: Routes = [
   { path: 'files/:nodeId/view', component: FileViewComponent, canActivate: [AuthGuardEcm], outlet: 'overlay' },

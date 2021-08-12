@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormRenderingService } from '@alfresco/adf-core';
-import { CustomEditorComponent } from '../stencils.module';
-import { PreviewService } from '../services/preview.service';
+import { CustomEditorComponent } from '../../stencils.module';
+import { PreviewService } from '../../services/preview.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from "@alfresco/adf-core";
-import { TrainingCompanyService } from 'app/training-company.service';
-import { getTasksResponse } from 'app/training-company.service';
-import { getProcessInstanceResponse } from 'app/training-company.service';
+import { TrainingCompanyService } from 'app/services/training-company.service';
+import { getTasksResponse } from 'app/services/ts-interfaces.service';
+import { getProcessInstanceResponse } from 'app/services/ts-interfaces.service';
 import {map, concatMap} from 'rxjs/operators'
 import { Observable, concat, combineLatest, of } from 'rxjs';
 
@@ -43,49 +43,12 @@ export class TaskDetailsComponent implements OnInit {
       }
       if (params.taskId) {
         this.taskId = params.taskId;
-        this.getNodeIdFromTask(this.taskId).subscribe(res => console.log(res))
+        this.ttc.getNodeIdFromTask(this.taskId).subscribe(res => this.nodeId = res)
       }
   })};
 
-  /**
-   * @param taskId 
-   * @returns observable that gets the processId so it can be used in the function "getProcessInstance"
-   */
-  getNodeIdFromTask(taskId:string): Observable<any> {
-      let headers= new HttpHeaders()
-      .append("Authorization", this.auth.getTicketBpm())
-      .append("Content-Type","application/json")
+  
 
-    return this.http.get <any> (`https://demo.incentro.digital/activiti-app/api/enterprise/tasks/${taskId}`, { headers: headers }) 
-      .pipe( 
-        map(res => 
-            this.getProcessInstance(res.processInstanceId)
-        )
-      )
-  }
-
-  /**
-   * 
-   * @param processInstanceId 
-   * @returns observable that gets the current NodeId wich is ten used to call te relevant document with the adf-document-list.
-   */
-
-  getProcessInstance ( processInstanceId:string = "20165" ): Observable<any> {
-    let headers= new HttpHeaders()
-    .append("Authorization", this.auth.getTicketBpm())
-    .append("Content-Type","application/json")
-
-    return this.http.get <getProcessInstanceResponse> (`https://demo.incentro.digital/activiti-app/api/enterprise/process-instances/${processInstanceId}`, {headers:headers})
-      .pipe(
-        map(res => res.variables.forEach((variable) => {
-          if (variable.name == "relevantNodeId"){
-            console.log( variable.value)
-            this.nodeId = variable.value
-            return variable.value
-          }
-        }))
-      )
-  }
 
   onContentClick(content: any) {
     if (content.contentBlob) {

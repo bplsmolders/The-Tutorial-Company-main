@@ -2,6 +2,10 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthenticationService } from "@alfresco/adf-core";
 import { Observable } from "rxjs";
+import { concatMap, map } from "rxjs/operators";
+import { ApplicationForm, getProcessInstanceResponse, FormJSONBody} from "./ts-interfaces.service";
+
+// put services in the whole app. 
 
 @Injectable ({
     providedIn: 'root',
@@ -13,12 +17,46 @@ export class TrainingCompanyService {
         private http: HttpClient
         ) {}
 
+    /**
+     * @param taskId 
+     * @returns observable that gets the processId so it can be used in the function "getProcessInstance"
+     */
+    getNodeIdFromTask(taskId:string): Observable<any> {
+        let headers= new HttpHeaders()
+        .append("Authorization", this.auth.getTicketBpm())
+        .append("Content-Type","application/json")
+
+    return this.http.get <any> (`https://demo.incentro.digital/activiti-app/api/enterprise/tasks/${taskId}`, { headers: headers }) 
+        .pipe( 
+        concatMap(res => 
+            this.getProcessInstance(res.processInstanceId)
+        )
+        )
+    }
+
+    /**
+     * 
+     * @param processInstanceId 
+     * @returns observable that gets the current NodeId wich is ten used to call te relevant document with the adf-document-list.
+     */
+
+    getProcessInstance ( processInstanceId:string ): Observable<any> {
+    let headers= new HttpHeaders()
+    .append("Authorization", this.auth.getTicketBpm())
+    .append("Content-Type","application/json")
+
+    return this.http.get <getProcessInstanceResponse> (`https://demo.incentro.digital/activiti-app/api/enterprise/process-instances/${processInstanceId}`, {headers:headers})
+        .pipe(
+        map(res => res.variables.find(variable => variable.name == "relevantNodeId").value)
+        )
+    }
+
     sendApplicationForm = (form:ApplicationForm):void => {
         let headers= new HttpHeaders()
             .append("Authorization", this.auth.getTicketBpm())
             .append("Content-Type","application/json")
         
-        let body = JSON.stringify(
+        let body: FormJSONBody = 
             {   
                 name : "Aanmeldproces trainee 2 - August 10th 2021",
                 processDefinitionId:"Aanmeldprocestrainee2:12:20148",
@@ -82,14 +120,16 @@ export class TrainingCompanyService {
                     }
                 ]
             }
-        )
+        
         console.log(body);
 
         this.http.post(
             "https://demo.incentro.digital/activiti-app/api/enterprise/process-instances", 
-            body, {headers: headers}
+            JSON.stringify(body), {headers: headers}
         )
             .subscribe(res => console.log(res))
+
+        
 
     }
 
@@ -118,139 +158,3 @@ export class TrainingCompanyService {
 
 }
 
-export class ApplicationForm {
-    topic: string;
-    course:string;
-    training: string;
-    relevantNodeId: string;
-    fullName: string;
-    company: string;
-    department: string;
-    position: string;
-    phoneNumber:string;
-    email: string;
-
-    constructor(){}
-
-}
-
-export class CourseInfo {
-    topic:string;
-    course:string;
-    training:string;
-    nodeId:string;
-
-    constructor(){}
-}
-
-export class getProcessInstanceResponse {
-        businessKey: string;
-        ended: string;
-        graphicalNotationDefined: true;
-        id: string;
-        name: string;
-        processDefinitionCategory: string;
-        processDefinitionDeploymentId: string;
-        processDefinitionDescription: string;
-        processDefinitionId: string;
-        processDefinitionKey: string;
-        processDefinitionName: string;
-        processDefinitionVersion: number;
-        startFormDefined: true;
-        started: string;
-        startedBy: {
-          company: string;
-          email: string;
-          externalId: string;
-          firstName: string;
-          id: number;
-          lastName: string;
-          pictureId: number
-        };
-        suspended: true;
-        tenantId: string;
-        variables: [
-          {
-            name: string;
-            scope: string;
-            type: string;
-            value: string
-          }
-        ]
-    
-    constructor(){}
-}
-
-export class getTasksResponse {
-        adhocTaskCanBeReassigned: boolean;
-        assignee: {
-          company: string,
-          email: string,
-          externalId: string,
-          firstName: string,
-          id: number,
-          lastName: string,
-          pictureId: number
-        }
-        category: string;
-        created: string;
-        description: string;
-        dueDate: string;
-        duration: number;
-        endDate: string;
-        executionId: string;
-        formKey: string;
-        id: string;
-        initiatorCanCompleteTask: true;
-        involvedGroups: [
-          {
-            externalId: string;
-            groups: [
-              {}
-            ];
-            id: number;
-            name: string;
-            parentGroupId: number;
-            status: string
-          }
-        ];
-        involvedPeople: [
-          {
-            company: string;
-            email: string;
-            externalId: string;
-            firstName: string;
-            id: number;
-            lastName: string;
-            pictureId: number
-          }
-        ];
-        managerOfCandidateGroup: true;
-        memberOfCandidateGroup: true;
-        memberOfCandidateUsers: true;
-        name: string;
-        parentTaskId: string;
-        parentTaskName: string;
-        priority: number;
-        processDefinitionCategory: string;
-        processDefinitionDeploymentId: string;
-        processDefinitionDescription: string;
-        processDefinitionId: string;
-        processDefinitionKey: string;
-        processDefinitionName: string;
-        processDefinitionVersion: number;
-        processInstanceId: string;
-        processInstanceName: string;
-        processInstanceStartUserId: string;
-        taskDefinitionKey: string;
-        variables: [
-          {
-            name: string;
-            scope: string;
-            type: string;
-            value: object;
-          }
-        ]
-
-    constructor(){}
-}

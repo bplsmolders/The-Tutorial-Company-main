@@ -6,8 +6,8 @@ import { ContentModule } from '@alfresco/adf-content-services';
 import { ProcessModule } from '@alfresco/adf-process-services';
 import { CoreModule, TRANSLATION_PROVIDER, TranslateLoaderService } from '@alfresco/adf-core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { FileViewComponent } from './file-view/file-view.component';
-import { BlobViewComponent } from './file-view/blob-view.component';
+import { FileViewComponent } from './components/file-view/file-view.component';
+import { BlobViewComponent } from './components/file-view/blob-view.component';
 import { PreviewService } from './services/preview.service';
 
 // Custom stencils
@@ -15,17 +15,17 @@ import { StencilsModule } from './stencils.module';
 
 // App components
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { AppsComponent } from './apps/apps.component';
-import { TasksComponent } from './tasks/tasks.component';
-import { TaskDetailsComponent } from './task-details/task-details.component';
-import { DocumentlistComponent } from './documentlist/documentlist.component';
-import { StartProcessComponent } from './start-process/start-process.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { AppsComponent } from './components/apps/apps.component';
+import { TasksComponent } from './components/tasks/tasks.component';
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
+import { DocumentlistComponent } from './components/documentlist/documentlist.component';
+import { StartProcessComponent } from './components/start-process/start-process.component';
 import { appRoutes } from './app.routes';
-import { AppSidenavLayoutComponent } from './app-sidenav-layout/app-sidenav-layout.component';
-import { ApplicationPageComponent } from './application-page/application-page.component';
-import { ApplicationFormComponent } from './application-form/application-form.component';
+import { AppSidenavLayoutComponent } from './components/app-sidenav-layout/app-sidenav-layout.component';
+import { ApplicationPageComponent } from './components/application-page/application-page.component';
+import { ApplicationFormComponent } from './components/application-form/application-form.component';
 
 
 // Localization
@@ -46,8 +46,8 @@ import localePl from '@angular/common/locales/pl';
 import localeFi from '@angular/common/locales/fi';
 import localeDa from '@angular/common/locales/da';
 import localeSv from '@angular/common/locales/sv';
-import { MyProfileComponent } from './my-profile/my-profile.component';
-import { UserManagementComponent } from './user-management/user-management.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
 
 registerLocaleData(localeFr);
 registerLocaleData(localeDe);
