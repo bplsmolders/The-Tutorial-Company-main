@@ -1,41 +1,92 @@
-input[type=text], select {
+
+// Variables
+$border-width: 3px;
+
+.my-profile {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-  
-input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
-input[type=submit]:hover {
-    background-color: #45a049;
-}
-  
-button {
-    background-color: black;
-    width: 200px;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 0 8px;
-}
-button:hover {
-    background-color: darkgray;
-}
-  
+.form {
+    width: 90%;
+
+    height: auto;
+    padding: 10px;
+
+    &__group{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        &__input{
+            caret-color: orange;
+            width:98%;
+            height: 40px;
+            font-size:16px;
+
+            &:invalid {
+                border: $border-width solid lightgray;
+            }
+
+            &:valid {
+                border: $border-width solid green;
+            }
+
+            &--unrequired:valid{
+                @extend .form__group__input;
+                border: $border-width solid lightgray;
+            }
+        }
+
+        &__label{
+            font-size: 14px;
+        }
+
+        &--buttons{
+            @extend .form__group;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+
+        &__button{
+            width: 150px;
+            height: 50px;
+            background: orange;
+            margin-left: 25px;
+            margin-bottom: 10px;
+            border: none;
+            font-size: large;
+            font-weight: bolder;
+
+            &:hover{
+                border: $border-width solid white;
+                box-shadow: 0 20px 20px rgba(0,0,0,0.1) ;
+            }
+
+            &:active{
+                border: $border-width solid black;
+                box-shadow: 0 20px 20px rgba(0,0,0,0.3) ;
+            }
+        }
+    }
+
+    &__fieldset{
+        border:2px solid orange;
+        width: 95%;
+        height: auto;
+        padding: 10px;
+        margin-bottom: 20px;
+
+        &__legend{
+            font-size: 18px;
+
+        }
+    }
+}  

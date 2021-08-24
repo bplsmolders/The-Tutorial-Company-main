@@ -20,12 +20,13 @@ import { LoginComponent } from './components/login/login.component';
 import { AppsComponent } from './components/apps/apps.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
-import { DocumentlistComponent } from './components/documentlist/documentlist.component';
+import { LesmateriaalComponent } from './components/lesmateriaal/lesmateriaal.component';
 import { StartProcessComponent } from './components/start-process/start-process.component';
 import { appRoutes } from './app.routes';
 import { AppSidenavLayoutComponent } from './components/app-sidenav-layout/app-sidenav-layout.component';
 import { ApplicationPageComponent } from './components/application-page/application-page.component';
 import { ApplicationFormComponent } from './components/application-form/application-form.component';
+import { TrainersDislplayComponent } from './components/trainers-display/trainers-display.component';
 
 
 // Localization
@@ -92,14 +93,15 @@ registerLocaleData(localeSv);
         LoginComponent,
         TasksComponent,
         TaskDetailsComponent,
-        DocumentlistComponent,
+        LesmateriaalComponent,
         StartProcessComponent,
         AppSidenavLayoutComponent,
         FileViewComponent,
         BlobViewComponent,
         MyProfileComponent,
         UserManagementComponent,
-        ApplicationFormComponent
+        ApplicationFormComponent,
+        TrainersDislplayComponent
     ],
     providers: [
         PreviewService,

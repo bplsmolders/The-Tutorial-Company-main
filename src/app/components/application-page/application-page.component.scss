@@ -56,14 +56,22 @@ img {
     bottom: 0;
     z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
     background-color: rgba(0,0,0,0.2);
+    // margin-left:199px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
 }
 
 .overlay {
     position: fixed; /* Sit on top of the page content */
     width: 50%; /* Full width (cover the whole page) */
     height: 80%; /* Full height (cover the whole page) */
-    margin-top: 50px;
-    margin-left: 400px;
+    // margin-top: 50px;
+    // margin-left: 400px;
     
     background-color: rgba(0,0,0,0.2); /* Black background with opacity */
     z-index: 1; /* Specify a stack order in case you're using a different order for other elements */

@@ -4,15 +4,15 @@ import { SpyLocation } from '@angular/common/testing';
 import { ContentModule } from '@alfresco/adf-content-services';
 import { ProcessModule } from '@alfresco/adf-process-services';
 import { CoreModule, TranslateLoaderService, AppConfigService, AppConfigServiceMock } from '@alfresco/adf-core';
-import { DocumentlistComponent } from './documentlist.component';
-import { PreviewService } from '../services/preview.service';
+import { LesmateriaalComponent } from './lesmateriaal.component';
+import { PreviewService } from '../../services/preview.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AlfrescoApiServiceMock, AlfrescoApiService } from '@alfresco/adf-core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
-describe('DocumentlistComponent', () => {
-  let component: DocumentlistComponent;
-  let fixture: ComponentFixture<DocumentlistComponent>;
+describe('LesmateriaalComponent', () => {
+  let component: LesmateriaalComponent;
+  let fixture: ComponentFixture<LesmateriaalComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -25,7 +25,7 @@ describe('DocumentlistComponent', () => {
             loader: { provide: TranslateLoader, useClass: TranslateLoaderService }
         })
       ],
-      declarations: [DocumentlistComponent],
+      declarations: [LesmateriaalComponent],
       providers: [
         PreviewService,
         { provide: AlfrescoApiService, useClass: AlfrescoApiServiceMock },
@@ -34,7 +34,7 @@ describe('DocumentlistComponent', () => {
       ]
     });
 
-    fixture = TestBed.createComponent(DocumentlistComponent);
+    fixture = TestBed.createComponent(LesmateriaalComponent);
     component = fixture.componentInstance;
   });
 

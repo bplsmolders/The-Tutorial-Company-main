@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthenticationService } from "@alfresco/adf-core";
 import { Observable } from "rxjs";
 import { concatMap, map } from "rxjs/operators";
-import { ApplicationForm, getProcessInstanceResponse, FormJSONBody} from "./ts-interfaces.service";
+import { ApplicationForm, getProcessInstanceResponse, FormJSONBody, getUserResponse} from "./ts-interfaces.service";
 
 // put services in the whole app. 
 
@@ -21,6 +21,11 @@ export class TrainingCompanyService {
      * @param taskId 
      * @returns observable that gets the processId so it can be used in the function "getProcessInstance"
      */
+
+    getNode(nodeId:string){
+        return this.http.get(`https://demo.incentro.digital/alfresco/api/-default-/public/alfresco/versions/1/nodes/${nodeId}`)
+    }
+
     getNodeIdFromTask(taskId:string): Observable<any> {
         let headers= new HttpHeaders()
         .append("Authorization", this.auth.getTicketBpm())
@@ -28,9 +33,9 @@ export class TrainingCompanyService {
 
     return this.http.get <any> (`https://demo.incentro.digital/activiti-app/api/enterprise/tasks/${taskId}`, { headers: headers }) 
         .pipe( 
-        concatMap(res => 
-            this.getProcessInstance(res.processInstanceId)
-        )
+            concatMap(res => 
+                this.getProcessInstance(res.processInstanceId)
+            )
         )
     }
 
@@ -41,14 +46,18 @@ export class TrainingCompanyService {
      */
 
     getProcessInstance ( processInstanceId:string ): Observable<any> {
-    let headers= new HttpHeaders()
-    .append("Authorization", this.auth.getTicketBpm())
-    .append("Content-Type","application/json")
+        let headers= new HttpHeaders()
+        .append("Authorization", this.auth.getTicketBpm())
+        .append("Content-Type","application/json")
 
-    return this.http.get <getProcessInstanceResponse> (`https://demo.incentro.digital/activiti-app/api/enterprise/process-instances/${processInstanceId}`, {headers:headers})
-        .pipe(
-        map(res => res.variables.find(variable => variable.name == "relevantNodeId").value)
-        )
+        return this.http.get <getProcessInstanceResponse> (`https://demo.incentro.digital/activiti-app/api/enterprise/process-instances/${processInstanceId}`, {headers:headers})
+            .pipe(
+                map(res => res.variables.find(variable => variable.name == "relevantNodeId").value)
+            )
+    }
+
+    getUserInfo(){
+        return this.http.get<getUserResponse> ('https://demo.incentro.digital/alfresco/api/-default-/public/alfresco/versions/1/-me-')
     }
 
     sendApplicationForm = (form:ApplicationForm):void => {
@@ -121,16 +130,11 @@ export class TrainingCompanyService {
                 ]
             }
         
-        console.log(body);
-
         this.http.post(
             "https://demo.incentro.digital/activiti-app/api/enterprise/process-instances", 
             JSON.stringify(body), {headers: headers}
         )
             .subscribe(res => console.log(res))
-
-        
-
     }
 
     // getRelevantNodeIdFromTask =  (taskId:string) : string => {

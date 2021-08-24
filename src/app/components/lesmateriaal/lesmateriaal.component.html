@@ -1,0 +1,70 @@
+<div class="lesmateriaal">
+  <adf-viewer 
+    [showViewer]="true" 
+    [overlayMode]="true" 
+    [showViewer]="showViewer"
+    [nodeId]="selectedNodeId"
+  >
+  </adf-viewer>
+
+
+  <div class="panel-left">
+    <adf-breadcrumb
+    [target]="documentList"
+    [rootId]="rootNodeId">
+    </adf-breadcrumb>
+
+    <adf-document-list #documentList
+      [currentFolderId]="rootNodeId"
+      [contextMenuActions]="true"
+      [contentActions]="true"
+      (nodeSelected)="getInput($event)"
+    >
+      <content-actions>
+        <content-action
+            title="download"
+            permission="download"
+            handler="download"
+        >
+        </content-action> 
+        <content-action
+          title="show preview"
+          target="document"
+          permission="download"
+          (execute)="showPreview()"
+        >
+        </content-action>
+      </content-actions>
+    </adf-document-list>
+
+    <adf-toolbar> 
+      <adf-upload-button
+        [rootFolderId]="documentList.currentFolderId || '-root-'"
+        [adf-check-allowable-operation]="create"
+        (success)="uploadSuccess($event)"
+      >
+      </adf-upload-button>
+    </adf-toolbar>
+
+  </div>
+  
+  <div class="panel-right">
+    <div class="panel-right__top">
+      <adf-content-metadata-card
+        [displayEmpty]="false"
+        [readOnly] = "true"
+        [preset]="'*'"
+        [node]="selectedNodeId"
+      >
+      </adf-content-metadata-card>
+    </div>
+
+    <div class="panel-right__bottom">
+      <adf-version-manager
+        node="76e28cd3-df71-4df2-9cc1-f388f8544785"
+        nodeId= "76e28cd3-df71-4df2-9cc1-f388f8544785"
+      >
+      </adf-version-manager>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { AlfrescoApiService } from '@alfresco/adf-core';
 import { EcmUserService } from '@alfresco/adf-core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { TrainingCompanyService } from 'app/services/training-company.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-application-page',
@@ -24,6 +26,7 @@ export class ApplicationPageComponent  {
   constructor(
     private apiService:AlfrescoApiService,
     private userService: EcmUserService,
+    private ttc: TrainingCompanyService
   ) { }
 
   //This function shows the SignUp action on a folder.
@@ -52,29 +55,38 @@ export class ApplicationPageComponent  {
     this.node=node[0].entry
 
     // selecting title and description to display on page
-    this.nodeTitle = this.node.properties["cm:title"];
-    this.nodeDescription = this.node.properties["cm:description"];
+    if(this.node.name.toUpperCase().includes('BESCHIKBAARHEID') == false){
+      this.nodeTitle = this.node.properties["cm:title"];
+      this.nodeDescription = this.node.properties["cm:description"];
+    }
+    
+    this.createCourseInfoObject()
+    this.findRelatedGroups()
+    this.getTrainersToDisplay()
 
+  }
 
-    // constructing a courseInfo object to pass down trough the next comoponent
+  // Filter out the related Groups found in the metadata of the selected node
+  findRelatedGroups(){
+    if(this.node.permissions.locallySet){
+      this.relatedGroups = this.node.permissions.locallySet
+    } 
+    else{
+      this.relatedGroups = this.node.permissions.inherited
+    }
+  }
+
+  // constructing a courseInfo object to pass down trough the  application form component
+  createCourseInfoObject(){
     this.courseInfo.training = this.node.name
     let pathArray = this.node.path.name.split('/')
     this.courseInfo.course= pathArray[pathArray.length-1]
     this.courseInfo.topic= pathArray[pathArray.length-2]
     this.courseInfo.nodeId = this.node.id
-    console.log(this.courseInfo)
-    
-
-    // Filter out the related Groups found in the metadata of the selected node
-    if(this.node.permissions.locallySet){
-      this.relatedGroups=this.node.permissions.locallySet
-    } else{
-      this.relatedGroups = this.node.permissions.inherited
-    }
-
-    
-    // first filter out the correct group that holds the trainers. this is done by checking if the group includes the name of the folder.
-    this.trainers=[];
+  }
+  
+  // first filter out the correct group that holds the trainers. this is done by checking if the group includes the name of the folder
+  getTrainersToDisplay(){
     this.relatedGroups.forEach(group => {
       if(group.authorityId.toUpperCase().includes(this.node.name.toUpperCase()) || this.relatedGroups.length === 1){
         //if it does, search the members of the group, then get the userinfo and push it on the array.
@@ -92,6 +104,5 @@ export class ApplicationPageComponent  {
           })
       } 
     })
-    
   }
 }

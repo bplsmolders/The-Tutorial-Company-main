@@ -2,27 +2,30 @@ import { Component, ViewChild, Input } from '@angular/core';
 import { NotificationService } from '@alfresco/adf-core';
 import { DocumentListComponent } from '@alfresco/adf-content-services';
 import { PreviewService } from '../../services/preview.service';
-import { NodePermissionDialogService } from '@alfresco/adf-content-services';
+import { NodeEntry } from '@alfresco/js-api';
 
 @Component({
-  selector: 'app-documentlist',
-  templateUrl: './documentlist.component.html',
-  styleUrls: ['./documentlist.component.css']
+  selector: 'app-lesmateriaal',
+  templateUrl: './lesmateriaal.component.html',
+  styleUrls: ['./lesmateriaal.component.scss']
 })
-export class DocumentlistComponent {
+export class LesmateriaalComponent {
 
   @Input()
   showViewer: boolean = false;
-
-  nodeId = 'ea768be7-f245-451d-a95c-c57ce52a2c15';
+  rootNodeId = '30e12cbb-1481-46ef-840d-6724239e3a2b';
+  selectedNodeId = '30e12cbb-1481-46ef-840d-6724239e3a2b';
 
   @ViewChild('documentList', { static: true })
   documentList: DocumentListComponent;
 
   constructor(
     private notificationService: NotificationService, 
-    private preview: PreviewService,
-    private nodePermissionService: NodePermissionDialogService) {
+    private preview: PreviewService) {
+  }
+
+  getInput(node:NodeEntry[]){
+    this.selectedNodeId=node[0].entry.id
   }
 
   uploadSuccess(event: any) {
@@ -30,16 +33,18 @@ export class DocumentlistComponent {
     this.documentList.reload();
   }
 
-  showPreview(event) {
-    const entry = event.value.entry;
-    if (entry && entry.isFile) {
-      this.preview.showResource(entry.id);
+  showPreview() {
+    console.log(this.selectedNodeId)
+    if(this.showViewer===false){
+      this.showViewer = true
+    } else { 
+      this.showViewer=false
     }
   }
 
   onGoBack(event: any) {
     this.showViewer = false;
-    this.nodeId = null;
+    this.selectedNodeId = null;
   }
 
 }

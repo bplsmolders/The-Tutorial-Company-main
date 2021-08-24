@@ -22,7 +22,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AppsComponent } from './components/apps/apps.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
-import { DocumentlistComponent } from './components/documentlist/documentlist.component';
+import { LesmateriaalComponent } from './components/lesmateriaal/lesmateriaal.component';
 import { StartProcessComponent } from './components/start-process/start-process.component';
 import { AppSidenavLayoutComponent } from './components/app-sidenav-layout/app-sidenav-layout.component';
 import { FileViewComponent } from './components/file-view/file-view.component';
@@ -73,7 +73,7 @@ export const appRoutes: Routes = [
               },
               {
                 path: 'documentlist',
-                component: DocumentlistComponent,
+                component: LesmateriaalComponent,
                 canActivate: [ AuthGuardEcm ]
               },
               {

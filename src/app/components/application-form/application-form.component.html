@@ -1,30 +1,58 @@
-<div class="form-container">
-    <form>
+<div class="application-form">
+    <form class="form">
         <div *ngIf="form.course">
             <h2> Topic: {{courseInfo.topic}}, Cursus: {{courseInfo.course}} </h2>
             <h4>{{courseInfo.training}}</h4> 
         </div>
         
-        <label for="fullName">Volledige Naam:</label>
-        <input [(ngModel)]="form.fullName" type="text" name="fullName">
-        
-        <label for="company">Organisatie:</label>
-        <input [(ngModel)]="form.company" type="text" name="company">
+        <fieldset class="form__fieldset">
+            <legend class=form__fieldset__legend>
+                Persoonlijke informatie
+            </legend>
 
-        <label for="afdeling">Afdeling:</label>
-        <input [(ngModel)]="form.department" type="text" name="afdeling">
-    
-        <label for="position">Functie:</label>
-        <input [(ngModel)]="form.position" type="text" name="position">
+            <div class="form__group">
+                <label for="fullName">Volledige Naam:</label>
+                <input [(ngModel)]="form.fullName" type="text" name="fullName">
+            </div>
+            
+            <div class="form__group">
+                <label for="phone">Telefoonnummer:</label>
+                <input [(ngModel)]="form.phoneNumber" type="text" name="Telefoonnummer">
+            </div>
 
-        <label for="phone">Telefoonnummer:</label>
-        <input [(ngModel)]="form.phoneNumber" type="text" name="Telefoonnummer">
+            <div class="form__group">
+                <label for="email">Email:</label>
+                <input [(ngModel)]="form.email" type="text" name="email">
+            </div>
+        </fieldset>
 
-        <label for="email">Email:</label>
-        <input [(ngModel)]="form.email" type="text" name="email">
+        <fieldset class=form__fieldset>
+            <legend class=form__fieldset__legend>
+                Bedrijfs Informatie
+            </legend>
+
+            <div class="form__group">
+                <label for="company">Organisatie:</label>
+                <input [(ngModel)]="form.company" type="text" name="company">
+            </div>
+
+            <div class="form__group">
+                <label for="afdeling">Afdeling:</label>
+                <input [(ngModel)]="form.department" type="text" name="afdeling">
+            </div>
+
+            <div class="form__group">
+                <label for="position">Functie:</label>
+                <input [(ngModel)]="form.position" type="text" name="position">
+            </div>
+        </fieldset>
+
+        <div class="form__group--buttons">
+            <button (click)="closeOverlay()" class="form__group__button" >Annuleren</button>
+            <button (click)="sendForm()" class="form__group__button">Inschrijven</button>
+        </div>
+
     </form>
     
-    <button (click)="closeOverlay()" >Annuleren!</button>
-    <button (click)="sendForm()">Let's Go!</button>
 
-</div>
+</div> 

@@ -8,14 +8,7 @@
         <div class="sub-container">
             
             <div class="panel">
-                <div *ngIf="trainers">
-                    <h2>Beschikbare Trainers</h2>
-                    <div *ngFor="let trainer of trainers" class="sub-panel">
-                        <img src="{{trainer.profilePic}}" alt="profilePic">
-                        <p>{{trainer.description}}</p>
-                    </div>
-                </div>
-                <h2 *ngIf="!trainers">Selecteer Cursus</h2>
+                <app-trainers-display [trainers] = "trainers"></app-trainers-display>
             </div>   
         </div>
 

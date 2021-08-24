@@ -10,6 +10,83 @@ export interface VariablesEntity {
     type: string;
     value: string;
 }
+
+export interface PersonBodyUpdate{
+  
+    firstName: string,
+    lastName: string,
+    description: string,
+    email: string,
+    skypeId: string,
+    googleId: string,
+    instantMessageId: string,
+    jobTitle: string,
+    location: string,
+    company: {
+      organization: string,
+      address1: string,
+      address2: string,
+      address3: string,
+      postcode: string,
+      telephone: string,
+      fax: string,
+      email: string
+    },
+    mobile: string,
+    telephone: string,
+    userStatus: string,
+    enabled: true,
+    emailNotificationsEnabled: true,
+    password: string,
+    oldPassword: string,
+    aspectNames: [
+      string
+    ],
+    properties: {}
+  
+}
+
+export interface getUserResponse {
+  
+    entry: {
+      id: string,
+      firstName: string,
+      lastName: string,
+      displayName: string,
+      description: string,
+      avatarId: string,
+      email: string,
+      skypeId: string,
+      googleId: string,
+      instantMessageId: string,
+      jobTitle: string,
+      location: string,
+      company: {
+        organization: string,
+        address1: string,
+        address2: string,
+        address3: string,
+        postcode: string,
+        telephone: string,
+        fax: string,
+        email: string
+      },
+      mobile: string,
+      telephone: string,
+      statusUpdatedAt: string,
+      userStatus: string,
+      enabled: true,
+      emailNotificationsEnabled: true,
+      aspectNames: [string],
+      properties: {},
+      capabilities: {
+        isAdmin: true,
+        isGuest: true,
+        isMutable: true
+      }
+    }
+  
+}
       
 
 export class ApplicationForm {
