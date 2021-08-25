@@ -9,6 +9,24 @@
     width: 48%;
 }
 
+.metadata{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    &__group{
+        @extend .metadata;
+        width: 99%;
+        border: 2px solid orange;
+
+        &__sub{
+            padding:10px
+        }
+    }
+}
+
 .panel-left{
     width: 48%;
 }

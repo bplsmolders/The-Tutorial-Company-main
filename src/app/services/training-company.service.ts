@@ -15,14 +15,14 @@ export class TrainingCompanyService {
     constructor (
         private auth: AuthenticationService,
         private http: HttpClient
-        ) {}
+    ) {}
 
     /**
      * @param taskId 
      * @returns observable that gets the processId so it can be used in the function "getProcessInstance"
      */
 
-    getNode(nodeId:string){
+    getNode(nodeId:string):Observable<Object>{
         return this.http.get(`https://demo.incentro.digital/alfresco/api/-default-/public/alfresco/versions/1/nodes/${nodeId}`)
     }
 

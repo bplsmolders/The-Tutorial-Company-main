@@ -2,8 +2,8 @@
     <div *ngIf="trainers">
         <h2>Beschikbare Trainers</h2>
         <div *ngFor="let trainer of trainers" class="trainers__trainer">
-            <img  src="{{trainer.profilePic}}" alt="profilePic">
-            <p >{{trainer.description}}</p>
+            <img class="trainers__trainer__profilePic" src="{{trainer.profilePic}}" alt="profilePic">
+            <p class="trainers__trainer__description">{{trainer.description}}</p>
         </div>
     </div>
     <h2 *ngIf="!trainers">Selecteer Cursus</h2>

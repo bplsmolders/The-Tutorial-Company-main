@@ -1,22 +1,25 @@
-// .trainers{
-//     display: flex;
-//     flex-direction: column;
+.trainers{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
-//     width: 99%;
+    width: 99%;
 
-//     &__trainer{
-//         width: 99%;
-//         // display: flex;
-//         // flex-direction: row;
+    &__trainer{
+        width: 99%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding-bottom: 20px;
 
-//         &, img{
-//             width: 50px;
-//             height: 70px;
-//         }
+        &__profilePic{
+            max-height: 100px;
+            max-width: 100px;
+        }
 
 
-//         &, p{
-//             margin-left: 10px;
-//         }
-//     }
-// }
+        &__description{
+            margin-left: 10px;
+        }
+    }
+}
