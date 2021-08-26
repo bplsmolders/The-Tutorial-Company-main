@@ -27,6 +27,7 @@ import { AppSidenavLayoutComponent } from './components/app-sidenav-layout/app-s
 import { ApplicationPageComponent } from './components/application-page/application-page.component';
 import { ApplicationFormComponent } from './components/application-form/application-form.component';
 import { TrainersDislplayComponent } from './components/trainers-display/trainers-display.component';
+import { DrawingsComponent } from './components/drawings/drawings.component';
 
 
 // Localization
@@ -101,7 +102,8 @@ registerLocaleData(localeSv);
         MyProfileComponent,
         UserManagementComponent,
         ApplicationFormComponent,
-        TrainersDislplayComponent
+        TrainersDislplayComponent,
+        DrawingsComponent
     ],
     providers: [
         PreviewService,

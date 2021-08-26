@@ -1,12 +1,13 @@
 <div class="lesmateriaal">
-  <adf-viewer 
-    [showViewer]="true" 
-    [overlayMode]="true" 
-    [showViewer]="showViewer"
-    [nodeId]="selectedNodeId"
-  >
-  </adf-viewer>
-
+  <div *ngIf="showViewer">
+    <adf-viewer 
+      [showViewer]="true" 
+      [overlayMode]="true" 
+      [showViewer]="showViewer"
+      [nodeId]="selectedNodeId"
+    >
+    </adf-viewer>
+  </div>
 
   <div class="panel-left">
     <adf-breadcrumb
@@ -34,6 +35,12 @@
           (execute)="showPreview()"
         >
         </content-action>
+        <content-action
+        title="upload version"
+        permission="download"
+        (execute)="versionManager()"
+        >
+        </content-action>
       </content-actions>
     </adf-document-list>
 
@@ -46,47 +53,51 @@
       </adf-upload-button>
     </adf-toolbar>
 
+    <div class="version-manager">
+      <h4>Version Manager:</h4>
+      <adf-version-manager
+      [node]="currentNode"
+      [showComments]="true"
+      [allowDownload]="true"
+      >
+      </adf-version-manager>
+    </div>
+  
   </div>
   
   <div class="panel-right">
-    <div class="panel-right__top" *ngIf="currentNode">
-      <div class="metadata">
+    <h3>File Info:</h3>
 
+    <div class="panel-right__top" *ngIf="currentNodeName">
+      <div class="metadata">
         <div class="metadata__group">
-          <h4>Naam:</h4>
-          <p>{{node.name))</p>
+          <h4>Name:</h4>
+          <p>{{currentNode.name}}</p>
         </div>
 
         <div class="metadata__group">
           <div class="metadata__group__sub">
-            <h4>Gecreerd op:</h4>
-            <p>{{node.createdAt))</p>
+            <h4>Created at:</h4>
+            <p>{{currentNode.createdAt}}</p>
           </div>
           <div>
-            <h4>Gecreeerd door:</h4>
-            <p>{{node.createdAt))</p>
+            <h4>Created by:</h4>
+            <p>{{currentNode.createdByUser.displayName}}</p>
           </div>
         </div>
 
         <div class="metadata__group">
           <div class="metadata__group__sub">
-            <h4>Laatst aangepast</h4>
-            <p>{{node.createdAt))</p>
+            <h4>Last modified By:</h4>
+            <p>{{currentNode.modifiedByUser.displayName}}</p>
           </div>
 
           <div class="metadata__group__sub">
-            <h4>Laatst aangepast door:</h4>
-            <p>{{node.modifiedByUser.displayName</p>
+            <h4>Last modified at</h4>
+            <p>{{currentNode.modifiedAt}}</p>
           </div>
         </div>
       </div>
-    </div>
-    <div class="panel-right__bottom">
-      <adf-version-manager
-        node="76e28cd3-df71-4df2-9cc1-f388f8544785"
-        nodeId= "76e28cd3-df71-4df2-9cc1-f388f8544785"
-      >
-      </adf-version-manager>
     </div>
   </div>
 </div>

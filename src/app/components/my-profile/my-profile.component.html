@@ -1,6 +1,5 @@
 <div class="my-profile">
-
-    <form action='#' method="POST" class='form'>  
+    <form action='#' method="POST" class='form' *ngIf="currentUser">  
         <H1>Profiel Info</H1>
 
         <fieldset class=form__fieldset>
@@ -10,51 +9,41 @@
 
             <div class="form__group">     
                 <label class="form__group__label" for="firstName">*Voornaam:</label>
-                <input class="form__group__input" id="firstName" required type="text" name="firstName">
+                <input class="form__group__input" id="firstName" required type="text" name="firstName" [(ngModel)]="currentUser.firstName">
             </div> 
             <div class="form__group">     
                 <label class="form__group__label" for="lastName">*Achternaam:</label>
-                <input class="form__group__input" id="lastName" required type="text" name="lastName">
+                <input class="form__group__input" id="lastName" required type="text" name="lastName" [(ngModel)]="currentUser.lastName">
             </div> 
             <div class="form__group">
                 <label class="form__group__label" for="phone">*Telefoonnummer:</label>
-                <input class="form__group__input" id="phone" required type="text" name="phone">
+                <input class="form__group__input" id="phone" required type="text" name="phone" [(ngModel)]="currentUser.mobile">
             </div> 
             <div class="form__group">
                 <label class="form__group__label" for="email">Email:</label>
-                <input class="form__group__input" id="email" required type="email" name="email">
+                <input class="form__group__input" id="email" required type="email" name="email" [(ngModel)]="currentUser.email">
             </div>  
-            <div class="form__group">
-                <label class="form__group__label" for="description">Samenvatting:</label>
-                <textarea name="description" id="description" cols="30" rows="10"></textarea>
-            </div>   
         </fieldset>
+
         <fieldset class=form__fieldset>
             <legend class=form__fieldset__legend>
                 Bedrijfs Informatie
             </legend>
-
-            <div class="form__group"> 
-                <label class="form__group__label" for="company">*Organisatie:</label>
-                <input class="form__group__input" id="company" required type="text" name="company">
-            </div> 
-            <div class="form__group">
-                <label class="form__group__label" for="department">Afdeling:</label>
-                <input class="form__group__input--unrequired" id="department" type="text" name="department">
-            </div> 
             <div class="form__group">
                 <label class="form__group__label" for="position">Functie:</label>
-                <input class="form__group__input--unrequired" id="position" type="text" name="position">
+                <input class="form__group__input--unrequired" id="position" type="text" name="position" [(ngModel)]="currentUser.jobTitle">
             </div> 
+            <div class="form__group">
+                <label class="form__group__label" for="description">Omschrijving/Samenvatting:</label>
+                <textarea name="description" id="description" cols="30" rows="10" [(ngModel)]="currentUser.description"></textarea>
+            </div>   
         </fieldset>
 
         <div class="form__group--buttons">
-            <input type="button" class="form__group__button" value="Updaten">
+            <input type="button" class="form__group__button" value="Updaten" (click)="updateUser()">
             <input type="button" class="form__group__button" value="Annuleren">
         </div>
 
         <p>*required</p>
-    
     </form>
-
 </div>

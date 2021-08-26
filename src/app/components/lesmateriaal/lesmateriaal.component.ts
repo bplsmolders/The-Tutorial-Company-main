@@ -1,9 +1,10 @@
 import { Component, ViewChild, Input } from '@angular/core';
 import { NotificationService } from '@alfresco/adf-core';
 import { DocumentListComponent } from '@alfresco/adf-content-services';
-import { PreviewService } from '../../services/preview.service';
 import { NodeEntry } from '@alfresco/js-api';
-import {TrainingCompanyService} from '../../services/training-company.service'
+import { MinimalNode } from '@alfresco/js-api';
+import { NodesApiService } from '@alfresco/adf-core';
+
 
 @Component({
   selector: 'app-lesmateriaal',
@@ -14,9 +15,11 @@ export class LesmateriaalComponent {
 
   @Input()
   showViewer: boolean = false;
+  showVersionManager:boolean = false
   rootNodeId = '30e12cbb-1481-46ef-840d-6724239e3a2b';
-  selectedNodeId = '30e12cbb-1481-46ef-840d-6724239e3a2b';
-  currentNode:Object;
+  selectedNodeId:string;
+  currentNode:MinimalNode;
+  currentNodeName:string;
   
 
   @ViewChild('documentList', { static: true })
@@ -24,13 +27,15 @@ export class LesmateriaalComponent {
 
   constructor(
     private notificationService: NotificationService, 
-    private preview: PreviewService,
-    private ttc: TrainingCompanyService
-    ) {}
+    private node:NodesApiService,
+  ) {}
 
   getInput(node:NodeEntry[]){
     this.selectedNodeId=node[0].entry.id
-    this.ttc.getNode(this.selectedNodeId).subscribe(res => this.currentNode = res)
+    this.node.getNode(this.selectedNodeId).subscribe((entry:MinimalNode)=> {
+      this.currentNode = entry
+      this.currentNodeName=entry.name
+    })
     console.log(this.currentNode)
   }
 
@@ -45,6 +50,14 @@ export class LesmateriaalComponent {
       this.showViewer = true
     } else { 
       this.showViewer=false
+    }
+  }
+
+  versionManager(){
+    if(this.showVersionManager===false){
+      this.showVersionManager = true
+    } else { 
+      this.showVersionManager=false
     }
   }
 

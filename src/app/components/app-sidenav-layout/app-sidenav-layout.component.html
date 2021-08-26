@@ -22,7 +22,7 @@
                     <mat-icon matListIcon class="sidenav-menu-icon">pending_actions</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Processen en Taken</div>
                 </a>
-                <a mat-list-item class="adf-sidenav-link" routerLink="/documentlist">
+                <a mat-list-item class="adf-sidenav-link" routerLink="/lesmateriaal">
                     <mat-icon matListIcon class="sidenav-menu-icon">folder_open</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Lesmateriaal</div>
                 </a>
@@ -38,6 +38,10 @@
                     <mat-icon matListIcon class="sidenav-menu-icon">group_add</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">User Management</div>
                 </a> -->
+                <a mat-list-item class="adf-sidenav-link" routerLink="/drawings">
+                    <mat-icon matListIcon class="sidenav-menu-icon">drawing</mat-icon>
+                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Figuren</div>
+                </a>
                 <a mat-list-item adf-logout class="adf-sidenav-link">
                     <mat-icon matListIcon class="sidenav-menu-icon">exit_to_app</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Logout</div>
