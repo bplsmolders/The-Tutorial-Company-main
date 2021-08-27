@@ -28,7 +28,7 @@ export class MyProfileComponent  {
   updateUser(){
     const body = JSON.stringify(this.currentUser)
     this.ttc.updateUser(body, this.currentUserId)
-    console.log(body)
+    // console.log(body)
   }
 
 }

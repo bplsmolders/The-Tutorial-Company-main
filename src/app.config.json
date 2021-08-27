@@ -4,7 +4,8 @@
     "bpmHost": "http://{hostname}{:port}",
     "providers" : "ALL",
     "application": {
-        "name": "Alfresco ADF Application"
+        "name": "Alfresco ADF Application",
+        "serviceHost": "https://demo.incentro.digital/alfresco/api/-default-/public/alfresco/versions/1"
     },
     "languages": [
         {

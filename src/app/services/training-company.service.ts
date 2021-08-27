@@ -4,6 +4,7 @@ import { AuthenticationService } from "@alfresco/adf-core";
 import { Observable } from "rxjs";
 import { concatMap, map } from "rxjs/operators";
 import { ApplicationForm, getProcessInstanceResponse, FormJSONBody, getUserResponse} from "./ts-interfaces.service";
+import { AppConfigService } from "@alfresco/adf-core";
 
 // put services in the whole app. 
 
@@ -12,10 +13,15 @@ import { ApplicationForm, getProcessInstanceResponse, FormJSONBody, getUserRespo
 })
 
 export class TrainingCompanyService {
+    acsUrl:string;
+
     constructor (
+        private config: AppConfigService,
         private auth: AuthenticationService,
         private http: HttpClient
-    ) {}
+    ) {
+        this.acsUrl = this.config.get("application.serviceHost")
+    }
 
     /**
      * @param taskId 
@@ -27,7 +33,9 @@ export class TrainingCompanyService {
         .append("Authorization", this.auth.getTicketBpm())
         .append("Content-Type","application/json")
 
-        this.http.put(`https://demo.incentro.digital/alfresco/api/-default-/public/alfresco/versions/1/people/-me-}`, userBody, {headers:headers}).subscribe(console.log)
+        console.log(this.acsUrl)
+
+        // this.http.put(`https://demo.incentro.digital/alfresco/api/-default-/public/alfresco/versions/1/people/-me-}`, userBody, {headers:headers}).subscribe(console.log)
         
     }
 
@@ -40,12 +48,12 @@ export class TrainingCompanyService {
         .append("Authorization", this.auth.getTicketBpm())
         .append("Content-Type","application/json")
 
-    return this.http.get <any> (`https://demo.incentro.digital/activiti-app/api/enterprise/tasks/${taskId}`, { headers: headers }) 
-        .pipe( 
-            concatMap(res => 
-                this.getProcessInstance(res.processInstanceId)
+        return this.http.get <any> (`https://demo.incentro.digital/activiti-app/api/enterprise/tasks/${taskId}`, { headers: headers }) 
+            .pipe( 
+                concatMap(res => 
+                    this.getProcessInstance(res.processInstanceId)
+                )
             )
-        )
     }
 
     /**

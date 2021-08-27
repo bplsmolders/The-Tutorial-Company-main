@@ -43,6 +43,10 @@ export class ApplicationPageComponent  {
     this.showOverlay = false
   }
   
+  /**
+   * 
+   * @param event start het signup process
+   */
   startSignUpProces(event:Event) {
     this.showOverlay = true 
   }

@@ -90,18 +90,18 @@ export interface getUserResponse {
       
 
 export class ApplicationForm {
-    topic: string;
-    course:string;
-    training: string;
-    relevantNodeId: string;
-    fullName: string;
-    company: string;
-    department: string;
-    position: string;
-    phoneNumber:string;
-    email: string;
+  topic: string;
+  course:string;
+  training: string;
+  relevantNodeId: string;
+  fullName: string;
+  company: string;
+  department: string;
+  position: string;
+  phoneNumber:string;
+  email: string;
 
-    constructor(){}
+  constructor(){}
 }
 
 export interface CourseInfo {
@@ -112,39 +112,39 @@ export interface CourseInfo {
 }
 
 export interface getProcessInstanceResponse {
-        businessKey: string;
-        ended: string;
-        graphicalNotationDefined: true;
-        id: string;
-        name: string;
-        processDefinitionCategory: string;
-        processDefinitionDeploymentId: string;
-        processDefinitionDescription: string;
-        processDefinitionId: string;
-        processDefinitionKey: string;
-        processDefinitionName: string;
-        processDefinitionVersion: number;
-        startFormDefined: true;
-        started: string;
-        startedBy: {
-          company: string;
-          email: string;
-          externalId: string;
-          firstName: string;
-          id: number;
-          lastName: string;
-          pictureId: number
-        };
-        suspended: true;
-        tenantId: string;
-        variables: [
-          {
-            name: string;
-            scope: string;
-            type: string;
-            value: string
-          }
-        ]
+  businessKey: string;
+  ended: string;
+  graphicalNotationDefined: true;
+  id: string;
+  name: string;
+  processDefinitionCategory: string;
+  processDefinitionDeploymentId: string;
+  processDefinitionDescription: string;
+  processDefinitionId: string;
+  processDefinitionKey: string;
+  processDefinitionName: string;
+  processDefinitionVersion: number;
+  startFormDefined: true;
+  started: string;
+  startedBy: {
+    company: string;
+    email: string;
+    externalId: string;
+    firstName: string;
+    id: number;
+    lastName: string;
+    pictureId: number
+  };
+  suspended: true;
+  tenantId: string;
+  variables: [
+    {
+      name: string;
+      scope: string;
+      type: string;
+      value: string
+    }
+  ]
 }
 
 export interface getTasksResponse {
