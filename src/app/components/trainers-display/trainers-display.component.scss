@@ -1,25 +1,21 @@
 .trainers{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
 
     width: 99%;
 
     &__trainer{
         width: 99%;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: flex-start;
-        padding-bottom: 20px;
+        align-items: left;
+        align-content: center;
 
         &__profilePic{
-            max-height: 100px;
-            max-width: 100px;
-        }
-
-
-        &__description{
-            margin-left: 10px;
+            max-height: 50px;
+            max-width: 50px;
+            padding: 3px;
         }
     }
 }

@@ -1,5 +1,5 @@
-<div class="my-profile">
-    <form action='#' method="POST" class='form' *ngIf="currentUser">  
+<div cclass='form'>
+    <form action='#' *ngIf="currentUser">  
         <H1>Profiel Info</H1>
 
         <fieldset class=form__fieldset>
@@ -7,43 +7,44 @@
                 Persoonlijke informatie
             </legend>
 
-            <div class="form__group">     
-                <label class="form__group__label" for="firstName">*Voornaam:</label>
-                <input class="form__group__input" id="firstName" required type="text" name="firstName" [(ngModel)]="currentUser.firstName">
-            </div> 
-            <div class="form__group">     
-                <label class="form__group__label" for="lastName">*Achternaam:</label>
-                <input class="form__group__input" id="lastName" required type="text" name="lastName" [(ngModel)]="currentUser.lastName">
-            </div> 
-            <div class="form__group">
-                <label class="form__group__label" for="phone">*Telefoonnummer:</label>
-                <input class="form__group__input" id="phone" required type="text" name="phone" [(ngModel)]="currentUser.mobile">
-            </div> 
-            <div class="form__group">
-                <label class="form__group__label" for="email">Email:</label>
-                <input class="form__group__input" id="email" required type="email" name="email" [(ngModel)]="currentUser.email">
-            </div>  
+            <mat-form-field class="form__group">     
+                <mat-label class="form__group__label" for="firstName">Voornaam:</mat-label>
+                <input matInput class="form__group__input" id="firstName" required type="text" name="firstName" [(ngModel)]="currentUser.firstName">
+            </mat-form-field> 
+            <mat-form-field class="form__group">     
+                <mat-label class="form__group__label" for="lastName">Achternaam:</mat-label>
+                <input matInput placeholder="Last Name" class="form__group__input" id="lastName" required type="text" name="lastName" [(ngModel)]="currentUser.lastName">
+            </mat-form-field> 
+            <mat-form-field class="form__group">
+                <mat-label class="form__group__label" for="phone">Telefoonnummer:</mat-label>
+                <input matInput class="form__group__input" id="phone" required type="text" name="phone" [(ngModel)]="currentUser.mobile">
+            </mat-form-field> 
+            <mat-form-field class="form__group">
+                <mat-label class="form__group__label" for="email">Email:</mat-label>
+                <input matInput class="form__group__input" id="email" required type="email" name="email" [(ngModel)]="currentUser.email">
+            </mat-form-field>  
         </fieldset>
 
         <fieldset class=form__fieldset>
             <legend class=form__fieldset__legend>
                 Bedrijfs Informatie
             </legend>
-            <div class="form__group">
-                <label class="form__group__label" for="position">Functie:</label>
-                <input class="form__group__input--unrequired" id="position" type="text" name="position" [(ngModel)]="currentUser.jobTitle">
-            </div> 
-            <div class="form__group">
-                <label class="form__group__label" for="description">Omschrijving/Samenvatting:</label>
-                <textarea name="description" id="description" cols="30" rows="10" [(ngModel)]="currentUser.description"></textarea>
-            </div>   
+            <mat-form-field class="form__group">
+                <mat-label class="form__group__label" for="position">Functie:</mat-label>
+                <input matInput class="form__group__input--unrequired" id="position" type="text" name="position" [(ngModel)]="currentUser.jobTitle">
+            </mat-form-field> 
+            <mat-form-field class="form__group">
+                <mat-label class="form__group__label" for="description">Omschrijving/Samenvatting:</mat-label>
+                <textarea matInput placeholder="Ex. as a consultant I spent most my time doing...." name="description" id="description" cols="30" rows="10" [(ngModel)]="currentUser.description"></textarea>
+            </mat-form-field>   
         </fieldset>
 
-        <div class="form__group--buttons">
-            <input type="button" class="form__group__button" value="Updaten" (click)="updateUser()">
-            <input type="button" class="form__group__button" value="Annuleren">
-        </div>
-
-        <p>*required</p>
     </form>
+    <div class="form__group--buttons">
+        <button mat-raised-button color="accent" class="form__group__button" (click)="updateUser()">Updaten</button>
+    </div>
+
+    <p>*required</p>
+
+    
 </div>

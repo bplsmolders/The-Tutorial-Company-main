@@ -28,18 +28,18 @@ $border-width: 3px;
             height: 40px;
             font-size:16px;
 
-            &:invalid {
-                border: $border-width solid lightgray;
-            }
+            // &:invalid {
+            //     border: $border-width solid lightgray;
+            // }
 
-            &:valid {
-                border: $border-width solid green;
-            }
+            // &:valid {
+            //     border: $border-width solid green;
+            // }
 
-            &--unrequired:valid{
-                @extend .form__group__input;
-                border: $border-width solid lightgray;
-            }
+            // &--unrequired:valid{
+            //     @extend .form__group__input;
+            //     border: $border-width solid lightgray;
+            // }
         }
 
         &__label{
@@ -64,16 +64,7 @@ $border-width: 3px;
             border: none;
             font-size: large;
             font-weight: bolder;
-
-            &:hover{
-                border: $border-width solid white;
-                box-shadow: 0 20px 20px rgba(0,0,0,0.1) ;
-            }
-
-            &:active{
-                border: $border-width solid black;
-                box-shadow: 0 20px 20px rgba(0,0,0,0.3) ;
-            }
+            color: black;
         }
     }
 

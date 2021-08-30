@@ -14,13 +14,19 @@ import { AppConfigService } from "@alfresco/adf-core";
 
 export class TrainingCompanyService {
     acsUrl:string;
+    apsUrl:string;
+    headers:any;
 
     constructor (
         private config: AppConfigService,
         private auth: AuthenticationService,
         private http: HttpClient
     ) {
-        this.acsUrl = this.config.get("application.serviceHost")
+        this.acsUrl = this.config.get("application.serviceHostACS")
+        this.apsUrl = this.config.get("application.serviceHostAPS")
+        this.headers = new HttpHeaders()
+            .append("Authorization", this.auth.getTicketBpm())
+            .append("Content-Type","application/json")
     }
 
     /**
@@ -29,26 +35,15 @@ export class TrainingCompanyService {
      */
 
     updateUser(userBody:string,userId:string){
-        let headers=new HttpHeaders()
-        .append("Authorization", this.auth.getTicketBpm())
-        .append("Content-Type","application/json")
-
-        console.log(this.acsUrl)
-
-        // this.http.put(`https://demo.incentro.digital/alfresco/api/-default-/public/alfresco/versions/1/people/-me-}`, userBody, {headers:headers}).subscribe(console.log)
-        
+        this.http.put(`${this.acsUrl}/people/-me-}`, userBody, {headers: this.headers}).subscribe(console.log)   
     }
 
     getNode(nodeId:string){
-        return this.http.get(`https://demo.incentro.digital/alfresco/api/-default-/public/alfresco/versions/1/nodes/${nodeId}`)
+        return this.http.get(`${this.acsUrl}/nodes/${nodeId}`)
     }
 
     getNodeIdFromTask(taskId:string): Observable<any> {
-        let headers= new HttpHeaders()
-        .append("Authorization", this.auth.getTicketBpm())
-        .append("Content-Type","application/json")
-
-        return this.http.get <any> (`https://demo.incentro.digital/activiti-app/api/enterprise/tasks/${taskId}`, { headers: headers }) 
+        return this.http.get <any> (`${this.apsUrl}/tasks/${taskId}`, { headers: this.headers }) 
             .pipe( 
                 concatMap(res => 
                     this.getProcessInstance(res.processInstanceId)
@@ -63,24 +58,17 @@ export class TrainingCompanyService {
      */
 
     getProcessInstance ( processInstanceId:string ): Observable<any> {
-        let headers= new HttpHeaders()
-        .append("Authorization", this.auth.getTicketBpm())
-        .append("Content-Type","application/json")
-
-        return this.http.get <getProcessInstanceResponse> (`https://demo.incentro.digital/activiti-app/api/enterprise/process-instances/${processInstanceId}`, {headers:headers})
+        return this.http.get <getProcessInstanceResponse> (`${this.apsUrl}/process-instances/${processInstanceId}`, {headers:this.headers})
             .pipe(
                 map(res => res.variables.find(variable => variable.name == "relevantNodeId").value)
             )
     }
 
     getUserInfo(userId:string = 'bart.smolders@incentro.com'){
-        return this.http.get<getUserResponse> (`https://demo.incentro.digital/alfresco/api/-default-/public/alfresco/versions/1/${userId}`).subscribe(console.log)
+        return this.http.get<getUserResponse> (`${this.acsUrl}/${userId}`).subscribe(console.log)
     }
 
     sendApplicationForm = (form:ApplicationForm):void => {
-        let headers= new HttpHeaders()
-            .append("Authorization", this.auth.getTicketBpm())
-            .append("Content-Type","application/json")
         
         let body: FormJSONBody = 
             {   
@@ -148,8 +136,8 @@ export class TrainingCompanyService {
             }
         
         this.http.post(
-            "https://demo.incentro.digital/activiti-app/api/enterprise/process-instances", 
-            JSON.stringify(body), {headers: headers}
+            `${this.apsUrl}/process-instances`, 
+            JSON.stringify(body), {headers: this.headers}
         )
             .subscribe(res => console.log(res))
     }
@@ -161,7 +149,7 @@ export class TrainingCompanyService {
 
     //     let nodeId:string;
 
-    //     this.http.get <getTasksResponse> (`https://demo.incentro.digital/activiti-app/api/enterprise/tasks/${taskId}`, { headers: headers })
+    //     this.http.get <getTasksResponse> (`${this.apsUrl}/tasks/${taskId}`, { headers: headers })
     //         .subscribe(res =>{
     //             let processInstanceId:string = res.processInstanceId
 

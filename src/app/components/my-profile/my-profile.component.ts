@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { TrainingCompanyService } from 'app/services/training-company.service';
 import { PersonBodyUpdate } from '@alfresco/js-api';
 import { EcmUserService } from '@alfresco/adf-core';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-my-profile',

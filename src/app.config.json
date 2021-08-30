@@ -5,7 +5,9 @@
     "providers" : "ALL",
     "application": {
         "name": "Alfresco ADF Application",
-        "serviceHost": "https://demo.incentro.digital/alfresco/api/-default-/public/alfresco/versions/1"
+        "serviceHostACS": "https://demo.incentro.digital/alfresco/api/-default-/public/alfresco/versions/1",
+        "serviceHostAPS": "https://demo.incentro.digital/activiti-app/api/enterprise"
+
     },
     "languages": [
         {
